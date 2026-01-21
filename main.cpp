@@ -4,7 +4,7 @@ using std::cin, std::cout;
 
 int main() {
 
-    cout << "Well, bless you!";
+    cout << "It's a brand new branch!";
 
     return 0;
 }
