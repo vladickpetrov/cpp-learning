@@ -4,7 +4,7 @@ using std::cin, std::cout;
 
 int main() {
 
-    cout << "Well, Fuck you!";
-    
+    cout << "Well, bless you!";
+
     return 0;
 }
