@@ -4,10 +4,7 @@ using std::cin, std::cout;
 
 int main() {
 
-    cout << "Fuck me in the pussy!";
-    cout << "Fuck me in the pussy!";
-    cout << "Fuck me in the pussy!";
-
-
+    cout << "Fuck right in this!";
+    
     return 0;
 }
