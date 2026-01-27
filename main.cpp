@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 void printMenu() {
     std::cout << "1. Add item \n";
@@ -9,14 +10,15 @@ void printMenu() {
     std::cout << "4. Exit \n";
 }
 
-void handleInput(int &user_input) {
-    std::cout << "Enter a number: \n";
-    std::cin >> user_input;
+int readInput(const std::string &prompt) {
+    int input;
+    std::cout << prompt;
+    std::cin >> input;
+    return input;
 }
 
-void addItem(std::vector<int> &items, int &item) {
-    handleInput(item);
-    items.push_back(item);
+void addItem(std::vector<int> &items) {
+    items.push_back(readInput("Enter as number element: "));
 }
 
 void showItems(const std::vector<int> &items) {
@@ -26,8 +28,8 @@ void showItems(const std::vector<int> &items) {
     std::cout << '\n';
 }
 
-void removeItem(std::vector<int> &items, int &item) {
-    handleInput(item);
+void removeItem(std::vector<int> &items) {
+    int item = readInput("Enter an element which all instances you want to delete: ");
     if (std::find(items.begin(), items.end(), item) == items.end()) {
         std::cout << "There is no " << item << " in the list \n";
         return;
@@ -41,19 +43,17 @@ void removeItem(std::vector<int> &items, int &item) {
 
 int main() {
     std::vector<int> items;
-    int choise;
-    int item;
 
     while (true) {
         printMenu();
-        handleInput(choise);
+        int choise = readInput("Enter a menu item: ");
 
         if (choise == 1) {
-            addItem(items, item);
+            addItem(items);
         } else if (choise == 2) {
             showItems(items);
         } else if (choise == 3) {
-            removeItem(items, item);
+            removeItem(items);
         } else if (choise == 4) {
             break;
         } else {
