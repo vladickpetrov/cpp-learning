@@ -14,6 +14,15 @@ int readInput(const std::string &prompt) {
     int input;
     std::cout << prompt;
     std::cin >> input;
+    while (std::cin.fail()) {
+        std::cout << "Invalid input. Try again. \n";
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        std::cout << prompt;
+        std::cin >> input;
+    }
     return input;
 }
 
