@@ -4,7 +4,7 @@
 #include <string>
 
 void printMenu() {
-    std::cout << "1. Add item \n";
+    std::cout << "\n1. Add item \n";
     std::cout << "2. Show items \n";
     std::cout << "3. Remove item \n";
     std::cout << "4. Exit \n";
@@ -31,6 +31,10 @@ void addItem(std::vector<int> &items) {
 }
 
 void showItems(const std::vector<int> &items) {
+    if (items.empty()) {
+        std::cout << "List is empty\n";
+        return;
+    }
     for (auto item: items) {
         std::cout << item << " ";
     }
@@ -38,6 +42,10 @@ void showItems(const std::vector<int> &items) {
 }
 
 void removeItem(std::vector<int> &items) {
+    if (items.empty()) {
+        std::cout << "Nothing to remove. List is empty.\n";
+        return;
+    }
     int item = readInput("Enter an element which all instances you want to delete: ");
     if (std::find(items.begin(), items.end(), item) == items.end()) {
         std::cout << "There is no " << item << " in the list \n";
