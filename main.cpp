@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <limits>
 
 void printMenu() {
     std::cout << "\n1. Add item \n";
@@ -63,15 +64,15 @@ int main() {
 
     while (true) {
         printMenu();
-        int choise = readInput("Enter a menu item: ");
+        int choice = readInput("Enter a menu item: ");
 
-        if (choise == 1) {
+        if (choice == 1) {
             addItem(items);
-        } else if (choise == 2) {
+        } else if (choice == 2) {
             showItems(items);
-        } else if (choise == 3) {
+        } else if (choice == 3) {
             removeItem(items);
-        } else if (choise == 4) {
+        } else if (choice == 4) {
             break;
         } else {
             std::cout << "It's not an option \n";
