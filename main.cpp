@@ -4,6 +4,18 @@
 #include <string>
 #include <limits>
 
+class ItemList {
+public:
+    void show() const;
+
+    void add();
+
+    void remove();
+
+private:
+    std::vector<int> items_;
+};
+
 void printMenu() {
     std::cout << "\n1. Add item \n";
     std::cout << "2. Show items \n";
@@ -27,51 +39,51 @@ int readInput(const std::string &prompt) {
     return input;
 }
 
-void addItem(std::vector<int> &items) {
-    items.push_back(readInput("Enter as number element: "));
+void ItemList::add() {
+    items_.push_back(readInput("Enter as number element: "));
 }
 
-void showItems(const std::vector<int> &items) {
-    if (items.empty()) {
+void ItemList::show() const {
+    if (items_.empty()) {
         std::cout << "List is empty\n";
         return;
     }
-    for (auto item: items) {
+    for (auto item: items_) {
         std::cout << item << " ";
     }
     std::cout << '\n';
 }
 
-void removeItem(std::vector<int> &items) {
-    if (items.empty()) {
+void ItemList::remove() {
+    if (items_.empty()) {
         std::cout << "Nothing to remove. List is empty.\n";
         return;
     }
     int item = readInput("Enter an element which all instances you want to delete: ");
-    if (std::find(items.begin(), items.end(), item) == items.end()) {
+    if (std::find(items_.begin(), items_.end(), item) == items_.end()) {
         std::cout << "There is no " << item << " in the list \n";
         return;
     }
-    auto new_start = std::remove(items.begin(), items.end(), item);
-    items.erase(new_start, items.end());
+    auto new_start = std::remove(items_.begin(), items_.end(), item);
+    items_.erase(new_start, items_.end());
     std::cout << "New list is:\n";
 
-    showItems(items);
+    this->show();
 }
 
 int main() {
-    std::vector<int> items;
+    ItemList list;
 
     while (true) {
         printMenu();
         int choice = readInput("Enter a menu item: ");
 
         if (choice == 1) {
-            addItem(items);
+            list.add();
         } else if (choice == 2) {
-            showItems(items);
+            list.show();
         } else if (choice == 3) {
-            removeItem(items);
+            list.remove();
         } else if (choice == 4) {
             break;
         } else {
