@@ -7,15 +7,17 @@
 
 class ItemList {
 public:
-    ItemList(const std::string& filename);
+    ItemList(const std::string &filename);
 
     ~ItemList();
 
-    void show() const;
+    bool empty() const;
 
-    void add();
+    bool add(int value);
 
-    void remove_value();
+    bool remove_value(int value);
+
+    const std::vector<int> &items() const;
 
 private:
     void load();
@@ -50,8 +52,9 @@ int readInput(const std::string &prompt) {
     return input;
 }
 
-void ItemList::add() {
-    items_.push_back(readInput("Enter as number element: "));
+bool ItemList::add(int value) {
+    items_.push_back(value);
+    return true;
 }
 
 ItemList::ItemList(const std::string &filename) : filename_(filename) {
@@ -80,32 +83,21 @@ void ItemList::save() const {
     }
 }
 
-void ItemList::show() const {
-    if (items_.empty()) {
-        std::cout << "List is empty\n";
-        return;
-    }
-    for (auto item: items_) {
-        std::cout << item << " ";
-    }
-    std::cout << '\n';
+bool ItemList::empty() const {
+    return items_.empty();
 }
 
-void ItemList::remove_value() {
-    if (items_.empty()) {
-        std::cout << "Nothing to remove. List is empty.\n";
-        return;
-    }
-    int item = readInput("Enter an element which all instances you want to delete: ");
-    if (std::find(items_.begin(), items_.end(), item) == items_.end()) {
-        std::cout << "There is no " << item << " in the list \n";
-        return;
-    }
-    auto new_start = std::remove(items_.begin(), items_.end(), item);
-    items_.erase(new_start, items_.end());
-    std::cout << "New list is:\n";
+const std::vector<int> &ItemList::items() const {
+    return items_;
+}
 
-    show();
+bool ItemList::remove_value(int value) {
+    auto new_start = std::remove(items_.begin(), items_.end(), value);
+    if (new_start == items_.end()) {
+        return false;
+    }
+    items_.erase(new_start, items_.end());
+    return true;
 }
 
 int main() {
@@ -116,11 +108,20 @@ int main() {
         int choice = readInput("Enter a menu item: ");
 
         if (choice == 1) {
-            list.add();
+            int add_value = readInput("Enter an element you want to add: ");
+            list.add(add_value);
         } else if (choice == 2) {
-            list.show();
+            if (list.empty()) {
+                std::cout << "List is empty\n";
+            } else {
+                for (auto item: list.items()) {
+                    std::cout << item << " ";
+                }
+                std::cout << '\n';
+            }
         } else if (choice == 3) {
-            list.remove_value();
+            int rem_value = readInput("Enter an element which all instances you want to delete: ");
+            list.remove_value(rem_value);
         } else if (choice == 4) {
             break;
         } else {
