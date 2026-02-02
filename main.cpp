@@ -45,18 +45,22 @@ void run_test(const std::string& test_name, bool (*test_func)()) {
 }
 
 bool test_empty_on_start() {
-    ItemList list("./tests/test_empty.txt");
+    ItemList list("test_empty.txt");
     return list.empty();
 }
 
 bool test_add() {
-    ItemList list("./tests/test_add");
+    ItemList list("test_add.txt");
     list.add(1);
+    for (int i : list.items()) {
+        std::cout << i;
+    }
+
     return !list.empty() && list.items().size() == 1;
 }
 
 bool test_remove_existing() {
-    ItemList list("./tests/test_remove_existing");
+    ItemList list("test_remove_existing.txt");
     list.add(3);
     list.remove_value(3);
     return list.empty();
