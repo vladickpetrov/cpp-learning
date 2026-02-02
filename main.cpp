@@ -36,6 +36,16 @@ void printMenu() {
     std::cout << "4. Exit \n";
 }
 
+void run_test(const std::string& test_name, bool (*test_func)()) {
+    if (test()) {
+        std::cout << "[OK]   " << test_name << '\n';
+    } else {
+        std::cout << "[FAIL]   " << test_name << '\n';
+    }
+}
+
+bool test_empty_on_strat(){}
+
 int readInput(const std::string &prompt) {
     int input;
     std::cout << prompt;
