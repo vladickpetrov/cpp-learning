@@ -4,4 +4,6 @@ project(Practice)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Practice main.cpp
+        ItemList.h
+        ItemList.cpp
 )
