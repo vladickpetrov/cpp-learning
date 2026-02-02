@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm>
+
 #include <limits>
 
 #include "ItemList.h"
@@ -27,10 +27,6 @@ bool test_empty_on_start() {
 bool test_add() {
     ItemList list("test_add.txt");
     list.add(1);
-    for (int i : list.items()) {
-        std::cout << i;
-    }
-
     return !list.empty() && list.items().size() == 1;
 }
 

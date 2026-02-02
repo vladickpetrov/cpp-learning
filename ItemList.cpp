@@ -1,7 +1,7 @@
 #include "ItemList.h"
 
-
 #include <fstream>
+#include <algorithm>
 
 bool ItemList::add(int value) {
     items_.push_back(value);
