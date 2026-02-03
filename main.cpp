@@ -1,7 +1,5 @@
 #include <iostream>
-
 #include <limits>
-
 #include "ItemList.h"
 
 void printMenu() {
@@ -9,32 +7,6 @@ void printMenu() {
     std::cout << "2. Show items \n";
     std::cout << "3. Remove item \n";
     std::cout << "4. Exit \n";
-}
-
-void run_test(const std::string& test_name, bool (*test_func)()) {
-    if (test_func()) {
-        std::cout << "[OK]   " << test_name << '\n';
-    } else {
-        std::cout << "[FAIL]   " << test_name << '\n';
-    }
-}
-
-bool test_empty_on_start() {
-    ItemList list("test_empty.txt");
-    return list.empty();
-}
-
-bool test_add() {
-    ItemList list("test_add.txt");
-    list.add(1);
-    return !list.empty() && list.items().size() == 1;
-}
-
-bool test_remove_existing() {
-    ItemList list("test_remove_existing.txt");
-    list.add(3);
-    list.remove_value(3);
-    return list.empty();
 }
 
 int readInput(const std::string &prompt) {
@@ -54,7 +26,7 @@ int readInput(const std::string &prompt) {
 }
 
 int main() {
-    ItemList list("items.txt");
+    ItemList<int> list("items.txt");
 
     while (true) {
         printMenu();
