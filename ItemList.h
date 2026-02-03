@@ -52,7 +52,7 @@ void ItemList<Type>::load() {
     if (!in) {
         return;
     }
-    int value;
+    Type value;
     while (in >> value) {
         items_.push_back(value);
     }
